@@ -1,0 +1,23 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Environments
+venv/
+.env
+
+# sqlite
+*.db
+
+# Namecheap
+.htaccess
+passenger_wsgi.py
+tmp/

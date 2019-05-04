@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>A Wibbly URL Shortener</title>
+</head>
+<body>
+  <h1>Wibbly URL Shortener</h1>
+{# Flashed Messages #}
+{% with messages=get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      {{ message }}
+    {% endfor %}  
+  {% endif %}
+{% endwith %}
+{# New rule form #}
+  <h2>Create a shortened URL</h2>  
+  <form action="" method="post">
+    {{ form.hidden_tag() }}
+    {% for error in form.key.errors %}
+      {{ error }}
+    {% endfor %}
+    {% for error in form.url.errors %}
+      {{ error }}
+    {% endfor %}
+    {% if form.key.errors or form.url.errors %}
+    <br>
+    {% endif %}
+    Shorten {{ form.url() }}
+    to {{ request.host }}/ {{ form.key(size=16) }} 
+    {{ form.submit()}}
+  </form>
+</body>
+</html>
