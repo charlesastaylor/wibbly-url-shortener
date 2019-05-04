@@ -15,7 +15,9 @@ def index():
     if form.validate_on_submit():
         key, url = form.key.data, form.url.data
         if UrlRule.query.filter_by(key=key).first():
-            flash(f'Key: {key} already in use, please choose another')
+            flash(f'{request.host}/{key} already in use, please try again...')
+        elif ' ' in key:
+            flash('No spaces! Try again...')
         else:
             newrule = UrlRule(key=key, url=url)
             db.session.add(newrule)
