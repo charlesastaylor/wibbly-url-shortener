@@ -5,33 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>A Wibbly URL Shortener</title>
+  {# favicon #}
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}">
+  <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
+  <link rel="mask-icon" href="{{ url_for('static', filename='safari-pinned-tab.svg') }}" color="#5bbad5">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <meta name="apple-mobile-web-app-title" content="WibblyURLS">
+  <meta name="application-name" content="WibblyURLS">
+  <meta name="msapplication-TileColor" content="#b91d47">
+  <meta name="msapplication-config" content="{{ url_for('static', filename='browserconfig.xml') }}">
+  <meta name="theme-color" content="#f68b8b">
+  {# Bootstrap CSS #}
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-  <h1>Wibbly URL Shortener</h1>
+
+<div class="container">
+  <div class="row min-vh-100 justify-content-center align-items-center">
+    <div class="col col-lg-6">
+      <div class="jumbotron">
+        <h1 class="display-4">Wibbly URL Shortener</h1>
+        <p class="lead">Create a shortened URL by entering your length url and and (optionally) choosing a new url.</p>
+        <hr class="my-4">
+        <form action="" method="post">
+          {{ form.hidden_tag() }}
+          {% for error in form.key.errors %}
+            {{ error }}
+          {% endfor %}
+          {% for error in form.url.errors %}
+            {{ error }}
+          {% endfor %}
+          {% if form.key.errors or form.url.errors %}
+          <br>
+          {% endif %}
+          <div class="form-group">
+            <label for="{{ form.url.id }}">Shorten</label>
+            {{ form.url(class_='form-control', placeholder="http://i-am-a-very-long.url") }}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.key.id }}">to {{ request.host }}/</label>
+            {{ form.key(class_='form-control', placeholder='iamshort') }}
+          </div>
+          <div class="text-right">
+            {{ form.submit(class_="btn btn-primary", style="min-width:80px")}}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 {# Flashed Messages #}
 {% with messages=get_flashed_messages() %}
   {% if messages %}
     {% for message in messages %}
-      {{ message }}
+      <div class="fixed-top alert alert-primary alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
     {% endfor %}  
   {% endif %}
 {% endwith %}
-{# New rule form #}
-  <h2>Create a shortened URL</h2>  
-  <form action="" method="post">
-    {{ form.hidden_tag() }}
-    {% for error in form.key.errors %}
-      {{ error }}
-    {% endfor %}
-    {% for error in form.url.errors %}
-      {{ error }}
-    {% endfor %}
-    {% if form.key.errors or form.url.errors %}
-    <br>
-    {% endif %}
-    Shorten {{ form.url() }}
-    to {{ request.host }}/ {{ form.key(size=16) }} 
-    {{ form.submit()}}
-  </form>
+{# Bootstrap JS #}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
