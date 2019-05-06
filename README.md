@@ -1,6 +1,4 @@
-This is my url shortener. There are many other like it, but this one is [wibbly](http://wibbly.website).
-
-#### Probably won't ever DO
+#### TO (probably never) DO
 - [ ] Add colour scheme
 - [ ] Improve flashed messages
 - [ ] Add lifetime for rules
