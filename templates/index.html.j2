@@ -6,16 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>A Wibbly URL Shortener</title>
   {# favicon #}
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}">
-  <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
-  <link rel="mask-icon" href="{{ url_for('static', filename='safari-pinned-tab.svg') }}" color="#5bbad5">
-  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{url_for('static', filename='apple-touch-icon.png') }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{url_for('static', filename='favicon-32x32.png') }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static', filename='favicon-16x16.png') }}">
+  <link rel="manifest" href="{{url_for('static', filename='site.webmanifest') }}">
+  <link rel="mask-icon" href="{{url_for('static', filename='safari-pinned-tab.svg') }}" color="#5bbad5">
+  <link rel="shortcut icon" href="{{url_for('static', filename='favicon.ico') }}">
   <meta name="apple-mobile-web-app-title" content="WibblyURLS">
   <meta name="application-name" content="WibblyURLS">
   <meta name="msapplication-TileColor" content="#b91d47">
-  <meta name="msapplication-config" content="{{ url_for('static', filename='browserconfig.xml') }}">
+  <meta name="msapplication-config" content="{{url_for('static', filename='browserconfig.xml') }}">
   <meta name="theme-color" content="#f68b8b">
   {# Bootstrap CSS #}
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -32,14 +32,11 @@
         <form action="" method="post">
           {{ form.hidden_tag() }}
           {% for error in form.key.errors %}
-            {{ error }}
+            <div class="alert alert-warning">{{ error }}</div>
           {% endfor %}
           {% for error in form.url.errors %}
-            {{ error }}
+            <div class="alert alert-warning">{{ error }}</div>
           {% endfor %}
-          {% if form.key.errors or form.url.errors %}
-          <br>
-          {% endif %}
           <div class="form-group">
             <label for="{{ form.url.id }}">Shorten</label>
             {{ form.url(class_='form-control', placeholder="http://i-am-a-very-long.url") }}
