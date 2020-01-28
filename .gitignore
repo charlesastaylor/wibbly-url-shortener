@@ -17,6 +17,9 @@ venv/
 # sqlite
 *.db
 
+# Editors
+.vscode/
+
 # Namecheap
 .htaccess
 passenger_wsgi.py
